@@ -6,6 +6,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 
 import artRoutes from './api/art/artRoutes'
+import socketService from './services/socketService'
 
 dotenv.config()
 
@@ -34,6 +35,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use('/api/art', artRoutes)
+
+socketService.connectSockets(http, session)
 
 app.get('/**', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'))
