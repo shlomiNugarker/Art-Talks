@@ -1,0 +1,40 @@
+.details {
+  background-color: lightpink;
+  padding: 10px;
+  min-height: 100vh;
+
+  .container {
+    h1 {
+    }
+    span {
+    }
+
+    div {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      height: 100%;
+
+      .img {
+        width: 65%;
+      }
+      .chat {
+        background-color: chocolate;
+        display: flex;
+        flex-direction: column;
+
+        p {
+        }
+        .listmsg {
+          min-height: 400px;
+        }
+        .send {
+          input {
+          }
+          button {
+          }
+        }
+      }
+    }
+  }
+}
