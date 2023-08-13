@@ -11,6 +11,7 @@ function App() {
   const [arts, setArts] = useState<any[]>([])
 
   useEffect(() => {
+    // eslint-disable-next-line no-extra-semi
     ;(async () => {
       const arts = await artService.query()
       console.log({ arts })

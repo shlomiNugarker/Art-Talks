@@ -17,7 +17,7 @@ async function getById(id: string) {
 
 async function save(art: any) {
   const savedArt = art.id
-    ? await httpService.put(`art/${art.id}`, art) // to do
+    ? await httpService.put(`art/${art.id}`, art)
     : await httpService.post('art/', art)
 
   return savedArt
