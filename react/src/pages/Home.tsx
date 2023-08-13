@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from 'react'
 import style from '../assets/scss/pages/_home.module.scss'
 import { Link } from 'react-router-dom'

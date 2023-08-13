@@ -5,8 +5,9 @@ import { useParams } from 'react-router-dom'
 import { socketService } from '../services/socketService'
 
 import style from '../assets/scss/pages/_details.module.scss'
+import { artService } from '../services/artService'
 
-export function Details({ arts }: any) {
+export function Details({ arts, setArts }: any) {
   const params = useParams()
   const [art, setArt] = useState<any>()
   const [msg, setMsg] = useState('')
@@ -20,21 +21,25 @@ export function Details({ arts }: any) {
   }, [arts, params.id])
 
   useEffect(() => {
-    socketService.on('get-msg', (msgs: string[]) => {
-      console.log(msgs)
+    socketService.on('get-msg', (updatedArt: any) => {
+      console.log(updatedArt)
+      const updatedArts = [...arts]
+      const idx = updatedArts.findIndex(
+        (art) => art.id.toString() === updatedArt.id
+      )
+      updatedArt[idx] = updatedArt
+      setArts(updatedArts)
     })
     return () => {
       socketService.off('get-msg')
     }
-  }, [])
+  }, [setArts])
 
   const send = () => {
-    console.log(msg)
     const artToSave = { ...art }
-    console.log({ artToSave })
-
     artToSave?.msgs.push(msg)
-    socketService.emit('send-msg', artToSave)
+    const savedArt = artService.save(artToSave)
+    socketService.emit('send-msg', savedArt)
     setMsg('')
   }
 

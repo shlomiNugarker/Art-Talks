@@ -39,6 +39,12 @@
       flex-direction: column;
       border-radius: 5px;
       border: 1px solid;
+
+      div {
+        img {
+          height: 300px;
+        }
+      }
     }
     .bottom {
       // background-color: lightseagreen;
