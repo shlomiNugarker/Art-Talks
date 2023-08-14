@@ -22,23 +22,24 @@ export function Details({ arts, setArts }: any) {
 
   useEffect(() => {
     socketService.on('get-msg', (updatedArt: any) => {
-      console.log(updatedArt)
       const updatedArts = [...arts]
       const idx = updatedArts.findIndex(
-        (art) => art.id.toString() === updatedArt.id
+        (art) => art.id.toString() === updatedArt.id.toString()
       )
-      updatedArt[idx] = updatedArt
+      setArt(updatedArt)
+      updatedArts[idx] = updatedArt
       setArts(updatedArts)
     })
     return () => {
       socketService.off('get-msg')
     }
-  }, [setArts])
+  }, [arts, setArts])
 
-  const send = () => {
+  const send = async () => {
     const artToSave = { ...art }
     artToSave?.msgs.push(msg)
-    const savedArt = artService.save(artToSave)
+    const savedArt = await artService.save(artToSave)
+
     socketService.emit('send-msg', savedArt)
     setMsg('')
   }
